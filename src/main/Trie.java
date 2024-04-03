@@ -32,6 +32,14 @@ public class Trie {
 	public void insert() {
 		// TODO
 	}
+	
+	public void search() {
+		
+	}
+	
+	public void delete() {
+		
+	}
 
 	// ETC
 
