@@ -24,13 +24,28 @@ public class Trie {
 		alphabet = _alphabet;
 		rootNode = new TrieNode(getAlphabetSize());
 	}
+	
+	static TrieNode root; 
 
 	/**********************************************************************************************
 	 * External Methods
 	 */
 
-	public void insert() {
+	public void insert(String key) {
 		// TODO
+		int length = key.length();
+		int index;
+		
+		TrieNode thisTrie = root;
+		
+		for (int level = 0; level < length; level++) {
+			index = key.charAt(level) - 'a';
+			if (thisTrie.childNodes[index] == null) {
+				thisTrie.childNodes[index] = new TrieNode(thisTrie.getAlphabetSize());
+			}
+			thisTrie = thisTrie.childNodes[index];
+		}
+		thisTrie.endOfWord = true;
 	}
 	
 	public void search() {
