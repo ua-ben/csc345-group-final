@@ -24,8 +24,8 @@ public class Trie {
 		alphabet = _alphabet;
 		rootNode = new TrieNode(getAlphabetSize());
 	}
-	
-	static TrieNode root; 
+
+	static TrieNode root;
 
 	/**********************************************************************************************
 	 * External Methods
@@ -35,9 +35,9 @@ public class Trie {
 		// TODO
 		int length = key.length();
 		int index;
-		
+
 		TrieNode thisTrie = root;
-		
+
 		for (int level = 0; level < length; level++) {
 			index = key.charAt(level) - 'a';
 			if (thisTrie.childNodes[index] == null) {
@@ -47,13 +47,27 @@ public class Trie {
 		}
 		thisTrie.endOfWord = true;
 	}
-	
-	public void search() {
-		
+
+	public boolean search(String key) {
+		int length = key.length();
+		int index;
+
+		TrieNode thisTrie = root;
+
+		for (int level = 0; level < length; level++) {
+			index = key.charAt(level) - 'a';
+
+			if (index >= getAlphabetSize() || thisTrie.childNodes[index] == null)
+				return false;
+
+			thisTrie = thisTrie.childNodes[index];
+		}
+
+		return (thisTrie.endOfWord);
 	}
-	
+
 	public void delete() {
-		
+
 	}
 
 	// ETC
