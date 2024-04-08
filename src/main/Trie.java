@@ -65,9 +65,51 @@ public class Trie {
 
 		return (thisTrie.endOfWord);
 	}
+	
+	/**
+	 * Deletes the given key from the Trie.
+	 * 
+	 * @param key: String/Word to remove.
+	 */
+	public void delete(String key) {
+		root = deleteR(root, key, 0);		
+	}
 
-	public void delete() {
-
+	/**
+	 * Recursive Portion of Delete function
+	 * Removes nodes if they have no children
+	 * 
+	 * @param node: Current TrieNode
+	 * @param key: String to remove
+	 * @param depth: Index in String to check
+	 * @return
+	 */
+	private TrieNode deleteR(TrieNode node, String key, int depth) {
+		if (node == null) { return null; }
+		
+		// Check if we are at end of word/key
+		if (depth == key.length()) {
+			if (node.endOfWord) { node.endOfWord = false; }
+			
+			// If this node is not the parent of an unrelated node, remove.
+			if (!node.hasChildren()) {
+				node = null;
+			}
+			
+			return node;
+		}
+		
+		
+		int index = key.charAt(depth) - 'a';
+		node.childNodes[index] = deleteR(node.childNodes[index], key, depth + 1);
+		
+		// Check again that the node has not been turned into a leaf
+		if (!node.hasChildren() && !node.endOfWord) {
+			node = null;
+		}
+		
+		
+		return node;
 	}
 
 	// ETC

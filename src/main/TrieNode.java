@@ -34,6 +34,19 @@ public class TrieNode {
 
 		childNodes[index] = newNode;
 	}
+	
+	/**
+	 * @return True if TrieNode has at least one child, false if no children exist.
+	 */
+	public boolean hasChildren() {
+		for (int i = 0; i < childNodes.length; i++) {
+			if (childNodes[i] != null) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	/**********************************************************************************************
 	 * Getters
