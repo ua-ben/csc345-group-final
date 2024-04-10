@@ -24,12 +24,13 @@ class testDelete {
 	void testDeletion() {
 		Trie trie = new Trie();
 
+		trie.insert("test");
+		trie.insert("tv");
 		assert (trie.search("test") == true);
 
 		trie.delete("test");
 		assert (trie.search("test") == false);
-		assert (trie.search("television") == true);
-
+		assert (trie.search("tv") == true);
 	}
 
 }
