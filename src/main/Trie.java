@@ -93,7 +93,7 @@ public class Trie {
 			}
 
 			// If this node is not the parent of an unrelated node, remove.
-			if (!node.hasChildren()) {
+			if (!node.hasChildren() && node != rootNode) {
 				node = null;
 			}
 
@@ -104,7 +104,7 @@ public class Trie {
 		node.childNodes[index] = deleteR(node.childNodes[index], key, depth + 1);
 
 		// Check again that the node has not been turned into a leaf
-		if (!node.hasChildren() && !node.endOfWord) {
+		if (!node.hasChildren() && !node.endOfWord && node != rootNode) {
 			node = null;
 		}
 

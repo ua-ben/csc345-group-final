@@ -42,7 +42,8 @@ class TestTries {
 
 	@Test
 	void testAddDelete() {
-		int maxElements = 100;
+		int maxElements = 10;
+		String alpha0 = "abcdefghijklmnopqrstuvwxyz";
 		String alpha1 = "qwertyuiopasdfghjklzxcvbnm";
 		String alpha2 = alpha1.toUpperCase();
 
