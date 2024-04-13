@@ -30,7 +30,6 @@ public class Trie {
 	 */
 
 	public void insert(String key) {
-		// TODO
 		int length = key.length();
 		int index;
 
@@ -43,6 +42,7 @@ public class Trie {
 			}
 			thisTrie = thisTrie.childNodes[index];
 		}
+
 		thisTrie.endOfWord = true;
 	}
 

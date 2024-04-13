@@ -46,7 +46,7 @@ class TestTries {
 
 	@Test
 	void testAddDelete() {
-		int maxElements = 10;
+		int maxElements = 1000;
 		String alpha0 = "abcdefghijklmnopqrstuvwxyz";
 		String alpha1 = "qwertyuiopasdfghjklzxcvbnm";
 		String alpha2 = alpha1.toUpperCase();
@@ -59,8 +59,10 @@ class TestTries {
 		for (int i = 0; i < maxElements; i++) {
 			String string = generateRandomString(i, alpha1, 1, 50);
 
-			trie.insert(string);
-			randomStrings.add(string);
+			if (!trie.search(string)) {
+				trie.insert(string);
+				randomStrings.add(string);
+			}
 
 			assertTrue(trie.search(string));
 		}
@@ -68,9 +70,8 @@ class TestTries {
 		Collections.shuffle(randomStrings);
 
 		// Remove the added strings
-		for (int i = 0; i < maxElements; i++) {
+		for (int i = 0; i < randomStrings.size(); i++) {
 			String string = randomStrings.get(i);
-
 
 			assertTrue(trie.search(string));
 			trie.search(string);
@@ -78,7 +79,7 @@ class TestTries {
 			assertFalse(trie.search(string));
 		}
 	}
-	
+
 	@Test
 	void testWordList() {
 		Trie trie = new Trie();
@@ -87,37 +88,36 @@ class TestTries {
 		int numWords = 0;
 		Random rng = new Random();
 		boolean test = false;
-		
+
 		try {
 			// Read words.txt and add all words to Trie
 			BufferedReader reader = new BufferedReader(new FileReader("words.txt"));
 			String line = reader.readLine();
-			
+
 			// Fill list with ~300k words
 			System.out.println("Filling Trie...");
 			while (line != null) {
-				trie.insert(line);	
+				trie.insert(line);
 				trieTotalWords++;
 				// 1/3000 chance to add to word list to check against later, max 100.
-				if(rng.nextInt(3000) == 1) {
+				if (rng.nextInt(3000) == 1) {
 					if (numWords < 100) {
 						words[numWords] = line;
 						numWords++;
-					}					
+					}
 				}
-				
+
 				line = reader.readLine();
-			}		
+			}
 			reader.close();
 			System.out.println("Added " + trieTotalWords + " words to the Trie!");
-			
-			
+
 			System.out.println("-------------------------------");
 			System.out.println("Searching for words...");
-			System.out.println("-------------------------------");			
-			
+			System.out.println("-------------------------------");
+
 			for (int i = 0; i < numWords; i++) {
-				
+
 				test = trie.search(words[i]);
 				assertTrue(test);
 				if (test) {
@@ -126,17 +126,17 @@ class TestTries {
 					System.out.println("Expected, but did not find: " + words[i]);
 				}
 			}
-			
+
 			System.out.println("-------------------------------");
 			System.out.println("Removing words...");
-			System.out.println("-------------------------------");		
-			
+			System.out.println("-------------------------------");
+
 			int index = rng.nextInt(numWords - 8);
 			for (int j = 0; j < 7; j++) {
 				String check = words[index + j];
 				System.out.println("Removing: " + check + "...");
-				trie.delete(check);			
-				
+				trie.delete(check);
+
 				test = !(trie.search(check));
 				assertTrue(test);
 				if (test) {
@@ -145,19 +145,15 @@ class TestTries {
 					System.out.println(check + " was not removed.");
 				}
 			}
-			
-			
+
 		} catch (FileNotFoundException e) {
 			System.out.println("Source Words File Not Found");
 			fail();
 		} catch (IOException e) {
 			fail();
-			e.printStackTrace();			
+			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 	}
 
 	private String generateRandomString(int seed, String alphabet, int minLength, int maxLength) {
