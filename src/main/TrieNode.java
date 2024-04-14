@@ -60,6 +60,9 @@ public class TrieNode {
 		return false;
 	}
 
+	/**
+	 * @return length of the alphabet
+	 */
 	public int getAlphabetSize() {
 		return childNodes.length;
 	}
