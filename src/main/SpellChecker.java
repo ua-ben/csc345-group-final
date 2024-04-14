@@ -5,6 +5,8 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,7 +18,7 @@ public class SpellChecker {
 	 * Data
 	 */
 
-	private Trie trie;
+	private SpellCheckerTrie trie;
 
 	private String alphabet;
 
@@ -50,7 +52,7 @@ public class SpellChecker {
 	 */
 	public SpellChecker(String alphabet, String dictonaryFilePath) {
 		this.alphabet = alphabet;
-		trie = new Trie(alphabet);
+		trie = new SpellCheckerTrie(alphabet);
 		words = 0;
 
 		try {
@@ -75,6 +77,15 @@ public class SpellChecker {
 	public boolean isWordMispelled(String query) {
 		String validatedWord = validateWord(query);
 		return !trie.search(validatedWord);
+	}
+
+	public List<String> getSpellingSuggestions(String query) {
+		List<String> suggestions = new ArrayList<String>();
+		String validatedWord = validateWord(query);
+
+		trie.getSpellingSuggestions(validatedWord, suggestions);
+
+		return suggestions;
 	}
 
 	/**

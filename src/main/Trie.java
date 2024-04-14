@@ -7,10 +7,10 @@ public class Trie {
 	 */
 
 	// Alphabet this Trie operates on
-	private String alphabet = null;
+	protected String alphabet = null;
 
 	// Root node of the Trie, created by default, will never be null
-	private TrieNode rootNode;
+	protected TrieNode rootNode;
 
 	/**********************************************************************************************
 	 * Constructors
@@ -111,13 +111,17 @@ public class Trie {
 		return node;
 	}
 
-	private int getIndexForCharacter(Character character) {
-		return character - alphabet.charAt(0);
-	}
-
 	/**********************************************************************************************
 	 * Getters
 	 */
+
+	protected int getIndexForCharacter(Character character) {
+		return character - alphabet.charAt(0);
+	}
+
+	protected char getCharacterFromIndex(int index) {
+		return alphabet.charAt(index);
+	}
 
 	public int getAlphabetSize() {
 		return alphabet.length();

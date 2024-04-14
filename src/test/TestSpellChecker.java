@@ -9,19 +9,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.channels.NonWritableChannelException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import main.SpellChecker;
+import main.SpellCheckerTrie;
 import main.Trie;
+import main.TrieNode;
 
 class TestSpellChecker {
 
-	@Test
+	@RepeatedTest(10)
 	void testWords() {
 		SpellChecker sc = new SpellChecker("words.txt");
 
@@ -30,12 +34,7 @@ class TestSpellChecker {
 
 		for (int i = 0; i < wordPoolSize; i++) {
 			String correctWord = correctWords.get(i);
-			System.out.println(correctWord);
 			boolean misspelled = sc.isWordMispelled(correctWord);
-
-			if (misspelled) {
-				misspelled = misspelled;
-			}
 
 			assertFalse(misspelled);
 		}
@@ -85,4 +84,52 @@ class TestSpellChecker {
 		return output;
 	}
 
+	@Test
+	void findDivergentNode() {
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		SpellCheckerTrie t = new SpellCheckerTrie(alphabet);
+		t.insert("because");
+
+		StringBuilder prefix = new StringBuilder();
+		TrieNode d = t.findDivergentNode("becuase", prefix);
+
+		assertNotEquals(d, null);
+		assertNotEquals(d.debugGetChildLetters(alphabet), "a");
+		assertEquals("bec", prefix.toString());
+		assertTrue(d.hasChildren());
+
+		t.getSpellingSuggestions(d, null);
+	}
+
+	@Test
+	void getSpellingSuggestions_0() {
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		SpellCheckerTrie t = new SpellCheckerTrie(alphabet);
+		t.insert("because");
+
+		List<String> suggestions = new ArrayList<String>();
+		t.getSpellingSuggestions("becuase", suggestions);
+
+		assertEquals(suggestions.get(0), "because");
+	}
+
+	@Test
+	void getSpellingSuggestions_1() {
+		SpellChecker t = new SpellChecker("words.txt");
+
+		List<String> misspellings = Arrays.asList("becvausze", "hapoiness", "trespasdasdss");
+		List<String> correctWords = Arrays.asList("because", "happiness", "trespass");
+		List<String> suggestions;
+
+		for (int i = 0; i < misspellings.size(); i++) {
+			suggestions = t.getSpellingSuggestions(misspellings.get(i));
+
+			System.out.println("Word: " + misspellings.get(i));
+			for (int j = 0; j < suggestions.size(); j++) {
+				System.out.println("suggestion: " + suggestions.get(j));
+			}
+
+			assertTrue(suggestions.contains(correctWords.get(i)));
+		}
+	}
 }

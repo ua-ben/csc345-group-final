@@ -24,8 +24,16 @@ public class TrieNode {
 	}
 
 	/**********************************************************************************************
-	 * External Methods
+	 * Debug Methods
 	 */
+
+	public String debugGetChildLetters(String knownAlphabet) {
+		String output = null;
+		for (int i = 0; i < childNodes.length; i++) {
+			output += childNodes[i] != null ? knownAlphabet.charAt(i) : "";
+		}
+		return output;
+	}
 
 	// TODO: Recursive add node, calculate index from character, etc
 
@@ -34,7 +42,11 @@ public class TrieNode {
 
 		childNodes[index] = newNode;
 	}
-	
+
+	/**********************************************************************************************
+	 * Getters
+	 */
+
 	/**
 	 * @return True if TrieNode has at least one child, false if no children exist.
 	 */
@@ -44,13 +56,9 @@ public class TrieNode {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-
-	/**********************************************************************************************
-	 * Getters
-	 */
 
 	public int getAlphabetSize() {
 		return childNodes.length;
