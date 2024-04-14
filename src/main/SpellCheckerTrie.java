@@ -17,7 +17,7 @@ public class SpellCheckerTrie extends Trie {
 	 */
 
 	/**
-	 * 
+	 *  constructor for spell checker
 	 */
 	public SpellCheckerTrie() {
 		super();
@@ -35,6 +35,11 @@ public class SpellCheckerTrie extends Trie {
 	 * Spell Checker Methods
 	 */
 
+	/**
+ 	 * This function gets spelling suggestions based on what words can be completed with the current inputted letters
+	 * @param forWord is the word that has currently been typed in
+  	 * @param spellingSuggestions is a list of possible words that can be spelled
+	 */
 	public void getSpellingSuggestions(String forWord, List<String> spellingSuggestions) {
 		StringBuilder prefixBuilder = new StringBuilder();
 		TrieNode divergentNode = findDivergentNode(forWord, prefixBuilder);
@@ -48,6 +53,11 @@ public class SpellCheckerTrie extends Trie {
 		gatherSuffixes(divergentNode, prefixBuilder.toString(), spellingSuggestions);
 	}
 
+	/**
+ 	 * This function gets spelling suggestions based on what words can be completed with the current inputted letters
+	 * @param divergentNode is the word that has currently been typed in
+  	 * @param spellingSuggestions is a list of possible words that can be spelled
+	 */
 	public void getSpellingSuggestions(TrieNode divergentNode, List<String> spellingSuggestions) {
 		List<String> suffixList = new ArrayList<String>();
 
