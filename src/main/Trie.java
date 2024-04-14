@@ -28,7 +28,12 @@ public class Trie {
 	/**********************************************************************************************
 	 * External Methods
 	 */
-
+	
+	/** 
+ 	 * Inserts the key into the Trie
+   	 *
+   	 * @param key: String/word to insert
+ 	 */
 	public void insert(String key) {
 		int length = key.length();
 		int index;
@@ -46,6 +51,11 @@ public class Trie {
 		thisTrie.endOfWord = true;
 	}
 
+	/** 
+ 	 * Searches for the key in the Trie
+   	 *
+   	 * @param key: String/word to search
+ 	 */
 	public boolean search(String key) {
 		int length = key.length();
 		int index;
@@ -114,7 +124,6 @@ public class Trie {
 	/**********************************************************************************************
 	 * Getters
 	 */
-
 	protected int getIndexForCharacter(Character character) {
 		return character - alphabet.charAt(0);
 	}
