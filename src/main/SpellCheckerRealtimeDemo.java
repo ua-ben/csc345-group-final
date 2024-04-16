@@ -3,6 +3,10 @@ package main;
 import java.util.List;
 import java.util.Scanner;
 
+/***
+ * CLI application demonstrating the use of Trie nodes as spell checking / auto
+ * complete tools
+ */
 public class SpellCheckerRealtimeDemo {
 
 	protected static SpellChecker spellChecker;

@@ -9,8 +9,10 @@ public class TrieNode {
 	 * Data
 	 */
 
+	// True if this node marks the end of a word
 	protected boolean endOfWord;
 
+	// List of child nodes that follow the letter represented by this node
 	protected TrieNode[] childNodes;
 
 	/*---------------------------------------------------------------------------
