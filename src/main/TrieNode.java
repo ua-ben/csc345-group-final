@@ -1,8 +1,11 @@
 package main;
 
+/**
+ * A node object for a Trie.
+ */
 public class TrieNode {
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Data
 	 */
 
@@ -10,10 +13,14 @@ public class TrieNode {
 
 	protected TrieNode[] childNodes;
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Constructors
 	 */
-
+	
+	/**
+	 * Creates a new Trie Node with the specified number of available children indeces.
+	 * @param alphabetSize Number of child indeces the node should contain.
+	 */
 	public TrieNode(int alphabetSize) {
 		endOfWord = false;
 
@@ -23,10 +30,15 @@ public class TrieNode {
 		}
 	}
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Debug Methods
 	 */
 
+	/**
+	 * 
+	 * @param knownAlphabet The alphabet the Trie is operating on
+	 * @return String for Debugging
+	 */
 	public String debugGetChildLetters(String knownAlphabet) {
 		String output = null;
 		for (int i = 0; i < childNodes.length; i++) {
@@ -35,15 +47,18 @@ public class TrieNode {
 		return output;
 	}
 
-	// TODO: Recursive add node, calculate index from character, etc
-
+	/**
+	 * Sets the child at index to direct to the newNode passed into the function.
+	 * @param index The index of the current node which will point to the newNode.
+	 * @param newNode Node to point to.
+	 */
 	public void setNextNode(int index, TrieNode newNode) {
 		assert (index < getAlphabetSize());
 
 		childNodes[index] = newNode;
 	}
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Getters
 	 */
 

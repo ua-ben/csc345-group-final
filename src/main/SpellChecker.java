@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * TODOC
+ * An algorithm to suggest possible complete words given one which is incomplete or non-existant.
  */
 public class SpellChecker {
 

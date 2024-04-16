@@ -1,8 +1,11 @@
 package main;
 
+/**
+ * A standard Trie structure to store and reference Strings, with each letter in a word acting as a node.
+ */
 public class Trie {
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Data
 	 */
 
@@ -12,27 +15,35 @@ public class Trie {
 	// Root node of the Trie, created by default, will never be null
 	protected TrieNode rootNode;
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Constructors
 	 */
-
+	
+	/**
+	 * Default constructor for a new Trie
+	 * Creates a Trie containing the 26 letters of the English alphabet for possible children.
+	 */
 	public Trie() {
 		this("abcdefghijklmnopqrstuvwxyz");
 	}
 
+	/**
+	 * Constructs a new Trie with the given String as characters for each node's possible children.
+	 * @param _alphabet String of characters to represent possible child nodes
+	 */
 	public Trie(String _alphabet) {
 		alphabet = _alphabet;
 		rootNode = new TrieNode(getAlphabetSize());
 	}
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * External Methods
 	 */
 	
 	/** 
  	 * Inserts the key into the Trie
    	 *
-   	 * @param key: String/word to insert
+   	 * @param key String/word to insert
  	 */
 	public void insert(String key) {
 		int length = key.length();
@@ -54,7 +65,8 @@ public class Trie {
 	/** 
  	 * Searches for the key in the Trie
    	 *
-   	 * @param key: String/word to search
+   	 * @param key String/word to search
+   	 * @return True if the word exists in the Trie, otherwise false
  	 */
 	public boolean search(String key) {
 		int length = key.length();
@@ -77,7 +89,7 @@ public class Trie {
 	/**
 	 * Deletes the given key from the Trie.
 	 * 
-	 * @param key: String/Word to remove.
+	 * @param key String/Word to remove.
 	 */
 	public void delete(String key) {
 		rootNode = deleteR(rootNode, key, 0);
@@ -86,9 +98,9 @@ public class Trie {
 	/**
 	 * Recursive Portion of Delete function Removes nodes if they have no children
 	 * 
-	 * @param node:  Current TrieNode
-	 * @param key:   String to remove
-	 * @param depth: Index in String to check
+	 * @param node  Current TrieNode
+	 * @param key   String to remove
+	 * @param depth Index in String to check
 	 * @return
 	 */
 	private TrieNode deleteR(TrieNode node, String key, int depth) {
@@ -121,7 +133,7 @@ public class Trie {
 		return node;
 	}
 
-	/**********************************************************************************************
+	/*---------------------------------------------------------------------------
 	 * Getters
 	 */
 	protected int getIndexForCharacter(Character character) {
@@ -131,7 +143,11 @@ public class Trie {
 	protected char getCharacterFromIndex(int index) {
 		return alphabet.charAt(index);
 	}
-
+	
+	/**
+	 * Gets the size of the alphabet, i.e. the number of possible children for a node.
+	 * @return Size of Alphabet
+	 */
 	public int getAlphabetSize() {
 		return alphabet.length();
 	}
