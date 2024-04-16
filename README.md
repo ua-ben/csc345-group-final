@@ -25,10 +25,6 @@ The files under src->Test contain:
 
 -TestTries.java
 
--simpleTest.java
-
--simpleTest is a sanity check to ensure the code isn't breaking when changes to the structure of the main code occur
-
 -TestTries tests the individual methods (insert, search, delete) of Trie.java and TrieNode.java. 
 
 -TestSpellChecker tests the autocomplete by applying a Trie to a dictionary. Afterwards, the user can enter words into the console. If the user types an invalid/incorrectly spelled word, the autocomplete will look for the last valid input and display a list of words that you may have wanted to type instead.

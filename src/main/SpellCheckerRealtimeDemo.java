@@ -1,6 +1,5 @@
 package main;
 
-import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +14,8 @@ public class SpellCheckerRealtimeDemo {
 		while (userInputScanner.hasNextLine()) {
 			checkWord(userInputScanner.nextLine());
 		}
+
+		userInputScanner.close();
 	}
 
 	static void checkWord(String word) {

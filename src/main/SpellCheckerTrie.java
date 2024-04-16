@@ -1,14 +1,11 @@
-/**
- * 
- */
 package main;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * 
+ * A Trie that has specific functions designed implement spell checking / word
+ * suggestion algorithms.
  */
 public class SpellCheckerTrie extends Trie {
 
@@ -17,18 +14,21 @@ public class SpellCheckerTrie extends Trie {
 	 */
 
 	/**
-	 *  constructor for spell checker
+	 * constructor for a spell checker tree, constructs an instance of SpellChecker
+	 * using a default alphabet (lower case a-z).
 	 */
 	public SpellCheckerTrie() {
 		super();
 	}
 
 	/**
+	 * Constructor for a spell checker tree, constructs an instance of SpellChecker
+	 * using a custom alphabet (as defined by _alphabet).
+	 * 
 	 * @param _alphabet
 	 */
 	public SpellCheckerTrie(String _alphabet) {
 		super(_alphabet);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**********************************************************************************************
@@ -36,9 +36,11 @@ public class SpellCheckerTrie extends Trie {
 	 */
 
 	/**
- 	 * This function gets spelling suggestions based on what words can be completed with the current inputted letters
-	 * @param forWord is the word that has currently been typed in
-  	 * @param spellingSuggestions is a list of possible words that can be spelled
+	 * This function gets spelling suggestions based on what words can be completed
+	 * with the current inputed letters
+	 * 
+	 * @param forWord             is the word that has currently been typed in
+	 * @param spellingSuggestions is a list of possible words that can be spelled
 	 */
 	public void getSpellingSuggestions(String forWord, List<String> spellingSuggestions) {
 		StringBuilder prefixBuilder = new StringBuilder();
@@ -53,9 +55,11 @@ public class SpellCheckerTrie extends Trie {
 	}
 
 	/**
- 	 * This function gets spelling suggestions based on what words can be completed with the current inputted letters
-	 * @param divergentNode is the word that has currently been typed in
-  	 * @param spellingSuggestions is a list of possible words that can be spelled
+	 * This function gets spelling suggestions based on what words can be completed
+	 * with the current inputed letters
+	 * 
+	 * @param divergentNode       is the word that has currently been typed in
+	 * @param spellingSuggestions is a list of possible words that can be spelled
 	 */
 	public void getSpellingSuggestions(TrieNode divergentNode, List<String> spellingSuggestions) {
 		List<String> suffixList = new ArrayList<String>();
@@ -75,6 +79,19 @@ public class SpellCheckerTrie extends Trie {
 		}
 	}
 
+	/***
+	 * Locates a divergent node in this Trie for a given word. Divergant nodes are
+	 * the final node before a word diverges into a word unknown to the tree. This
+	 * can be used to find the root note with which to generate spelling suggestions
+	 * from. Think of divergent nodes as the last correctly spelled letter in a
+	 * word.
+	 * 
+	 * @param word            String to search for.
+	 * @param divergentPrefix StringBuilder instance that will be populated with the
+	 *                        contents of @word up to (but not including) the
+	 *                        divergent character
+	 * @return The divergent node.
+	 */
 	public TrieNode findDivergentNode(String word, StringBuilder divergentPrefix) {
 		int wordLength = word.length();
 		int characterIndex = 0;

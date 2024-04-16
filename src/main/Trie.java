@@ -1,7 +1,8 @@
 package main;
 
 /**
- * A standard Trie structure to store and reference Strings, with each letter in a word acting as a node.
+ * A standard Trie structure to store and reference Strings, with each letter in
+ * a word acting as a node.
  */
 public class Trie {
 
@@ -18,17 +19,19 @@ public class Trie {
 	/*---------------------------------------------------------------------------
 	 * Constructors
 	 */
-	
+
 	/**
-	 * Default constructor for a new Trie
-	 * Creates a Trie containing the 26 letters of the English alphabet for possible children.
+	 * Default constructor for a new Trie Creates a Trie containing the 26 letters
+	 * of the English alphabet for possible children.
 	 */
 	public Trie() {
 		this("abcdefghijklmnopqrstuvwxyz");
 	}
 
 	/**
-	 * Constructs a new Trie with the given String as characters for each node's possible children.
+	 * Constructs a new Trie with the given String as characters for each node's
+	 * possible children.
+	 * 
 	 * @param _alphabet String of characters to represent possible child nodes
 	 */
 	public Trie(String _alphabet) {
@@ -39,12 +42,12 @@ public class Trie {
 	/*---------------------------------------------------------------------------
 	 * External Methods
 	 */
-	
-	/** 
- 	 * Inserts the key into the Trie
-   	 *
-   	 * @param key String/word to insert
- 	 */
+
+	/**
+	 * Inserts the key into the Trie
+	 *
+	 * @param key String/word to insert
+	 */
 	public void insert(String key) {
 		int length = key.length();
 		int index;
@@ -62,12 +65,12 @@ public class Trie {
 		thisTrie.endOfWord = true;
 	}
 
-	/** 
- 	 * Searches for the key in the Trie
-   	 *
-   	 * @param key String/word to search
-   	 * @return True if the word exists in the Trie, otherwise false
- 	 */
+	/**
+	 * Searches for the key in the Trie
+	 *
+	 * @param key String/word to search
+	 * @return True if the word exists in the Trie, otherwise false
+	 */
 	public boolean search(String key) {
 		int length = key.length();
 		int index;
@@ -76,6 +79,11 @@ public class Trie {
 
 		for (int level = 0; level < length; level++) {
 			index = getIndexForCharacter(key.charAt(level));
+
+			// invalid character
+			if (index == -1) {
+				return false;
+			}
 
 			if (index >= getAlphabetSize() || thisTrie.childNodes[index] == null)
 				return false;
@@ -136,16 +144,43 @@ public class Trie {
 	/*---------------------------------------------------------------------------
 	 * Getters
 	 */
+
+	/***
+	 * Returns the index of an array where the node representing {@code character}
+	 * will reside.
+	 * 
+	 * Inverse of {@link #getCharacterFromIndex(int)}
+	 * 
+	 * @param character Character to convert to an index.
+	 * @return the index of Character. Returns -1 if the character is not in the
+	 *         alphabet
+	 */
 	protected int getIndexForCharacter(Character character) {
-		return character - alphabet.charAt(0);
+		int characterIndex = character - alphabet.charAt(0);
+		if (characterIndex < 0 || characterIndex >= alphabet.length()) {
+			characterIndex = -1;
+		}
+
+		return characterIndex;
 	}
 
+	/***
+	 * Returns the character that we would expect to find at the given index of a
+	 * node.
+	 * 
+	 * Inverse of {@link #getIndexForCharacter(Character)}
+	 * 
+	 * @param index
+	 * @return
+	 */
 	protected char getCharacterFromIndex(int index) {
 		return alphabet.charAt(index);
 	}
-	
+
 	/**
-	 * Gets the size of the alphabet, i.e. the number of possible children for a node.
+	 * Gets the size of the alphabet, i.e. the number of possible children for a
+	 * node.
+	 * 
 	 * @return Size of Alphabet
 	 */
 	public int getAlphabetSize() {

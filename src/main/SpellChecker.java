@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main;
 
 import java.io.File;
@@ -10,7 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * An algorithm to suggest possible complete words given one which is incomplete or non-existant.
+ * An algorithm to suggest possible complete words given one which is incomplete
+ * or non-existant.
  */
 public class SpellChecker {
 
@@ -18,10 +16,13 @@ public class SpellChecker {
 	 * Data
 	 */
 
+	// Internal trie used to store our word bank
 	private SpellCheckerTrie trie;
 
+	// Alphabet this spell checker operates within
 	private String alphabet;
 
+	// Count of words in the trie
 	private int words;
 
 	/**********************************************************************************************
@@ -79,6 +80,15 @@ public class SpellChecker {
 		return !trie.search(validatedWord);
 	}
 
+	/***
+	 * Given a word, returns a list of spelling suggestions based on the queries
+	 * correctly spelled prefix. Suggestions will only be populated if the query is
+	 * misspelled.
+	 * 
+	 * @param query The word to find spelling suggestions for.
+	 * @return A list of spelling suggestions based on the queries correctly spelled
+	 *         prefix
+	 */
 	public List<String> getSpellingSuggestions(String query) {
 		List<String> suggestions = new ArrayList<String>();
 		String validatedWord = validateWord(query);
@@ -120,6 +130,13 @@ public class SpellChecker {
 		}
 	}
 
+	/***
+	 * Convert this word to a format the spell checker trie can parse.
+	 * 
+	 * @param word String to convert
+	 * @return Converted, corrected, string that is parsable by the internal Trie
+	 *         structure.
+	 */
 	private String validateWord(String word) {
 		return word.toLowerCase();
 	}

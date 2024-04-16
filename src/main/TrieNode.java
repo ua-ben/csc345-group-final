@@ -16,9 +16,11 @@ public class TrieNode {
 	/*---------------------------------------------------------------------------
 	 * Constructors
 	 */
-	
+
 	/**
-	 * Creates a new Trie Node with the specified number of available children indeces.
+	 * Creates a new Trie Node with the specified number of available children
+	 * indeces.
+	 * 
 	 * @param alphabetSize Number of child indeces the node should contain.
 	 */
 	public TrieNode(int alphabetSize) {
@@ -35,6 +37,7 @@ public class TrieNode {
 	 */
 
 	/**
+	 * Debug function returning the list of letters this node houses
 	 * 
 	 * @param knownAlphabet The alphabet the Trie is operating on
 	 * @return String for Debugging
@@ -49,7 +52,8 @@ public class TrieNode {
 
 	/**
 	 * Sets the child at index to direct to the newNode passed into the function.
-	 * @param index The index of the current node which will point to the newNode.
+	 * 
+	 * @param index   The index of the current node which will point to the newNode.
 	 * @param newNode Node to point to.
 	 */
 	public void setNextNode(int index, TrieNode newNode) {

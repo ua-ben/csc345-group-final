@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import main.Trie;
@@ -44,27 +45,30 @@ class TestTries {
 		assert (trie.search("tv") == true);
 	}
 
-	@Test
+	@RepeatedTest(25)
 	void testAddDelete() {
 		int maxElements = 1000;
-		String alpha0 = "abcdefghijklmnopqrstuvwxyz";
 		String alpha1 = "qwertyuiopasdfghjklzxcvbnm";
-		String alpha2 = alpha1.toUpperCase();
+		String alphaInvalid = alpha1.toUpperCase();
 
 		Trie trie = new Trie();
 
 		List<String> randomStrings = new ArrayList<String>(maxElements);
+		List<String> randomInvalidStrings = new ArrayList<String>(maxElements);
 
 		// Add @maxElements random strings
 		for (int i = 0; i < maxElements; i++) {
 			String string = generateRandomString(i, alpha1, 1, 50);
+			String invalidString = generateRandomString(i, alphaInvalid, 1, 50);
 
 			if (!trie.search(string)) {
 				trie.insert(string);
 				randomStrings.add(string);
 			}
+			randomInvalidStrings.add(string);
 
 			assertTrue(trie.search(string));
+			assertFalse(trie.search(invalidString));
 		}
 
 		Collections.shuffle(randomStrings);
@@ -74,6 +78,17 @@ class TestTries {
 			String string = randomStrings.get(i);
 
 			assertTrue(trie.search(string));
+			trie.search(string);
+			trie.delete(string);
+			assertFalse(trie.search(string));
+		}
+
+		// Attempt to remove string that are not in the array just to make sure that
+		// works!
+		for (int i = 0; i < randomInvalidStrings.size(); i++) {
+			String string = randomInvalidStrings.get(i);
+
+			assertFalse(trie.search(string));
 			trie.search(string);
 			trie.delete(string);
 			assertFalse(trie.search(string));
@@ -157,7 +172,6 @@ class TestTries {
 	}
 
 	private String generateRandomString(int seed, String alphabet, int minLength, int maxLength) {
-		String output = "";
 		Random random = new Random(seed);
 		int length = random.nextInt(minLength, maxLength);
 
