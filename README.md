@@ -4,15 +4,20 @@ Tries
 work-bank sourced from : https://github.com/dwyl/english-words
 
 The files under src->main contain:
+
 -Trie.java
 -TrieNode.java 
+
 These classes contain the functions necessary to make a Trie function. src->main also contains:
--SpellChecker.java, 
+
+-SpellChecker.java
 -SpellCheckerRealtimeDemo.java
 -SpellCheckerTrie.java 
+
 This code applies a Trie to make an autocomplete similar to text applications (such as autocomplete on ios).
 
 The files under src->Test contain:
+
 -TestSpellChecker.java
 -TestTries.java
 -simpleTest.java
