@@ -45,7 +45,6 @@ public class SpellCheckerTrie extends Trie {
 		TrieNode divergentNode = findDivergentNode(forWord, prefixBuilder);
 
 		if (divergentNode == null) {
-			System.out.println("unable to located divergent node");
 			// no spelling suggestions
 			return;
 		}
@@ -62,10 +61,6 @@ public class SpellCheckerTrie extends Trie {
 		List<String> suffixList = new ArrayList<String>();
 
 		gatherSuffixes(divergentNode, "", suffixList);
-
-		for (int i = 0; i < suffixList.size(); i++) {
-			System.out.println("found suffix: " + suffixList.get(i));
-		}
 	}
 
 	private void gatherSuffixes(TrieNode node, String suffix, List<String> suffixList) {
@@ -93,9 +88,6 @@ public class SpellCheckerTrie extends Trie {
 			if (nextNode == null) {
 				return node;
 			}
-
-			// TODO: Recursive checks on non-null nodes to determine if they will eventually
-			// diverge to an invalid word!
 
 			divergentPrefix.append(word.charAt(i));
 			node = nextNode;
